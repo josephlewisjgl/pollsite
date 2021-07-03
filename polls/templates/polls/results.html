@@ -7,9 +7,10 @@
   <body>
       <ul>
         {% for question in questions.choice_set.all %}
+        <!-- Display each answer choice next to the number of votes pluralized -->
             <li>{{choice.choice_text}} -- {{choice.votes}} vote{{choice.votes|pluralize}}</li>
         </ul>
-
+        <!-- Display link to vote again and redirect to get back to the detail -->
         <a href = "{% url % 'polls:detail' question.id %}">Vote again?</a>
     </body>
 </html>
