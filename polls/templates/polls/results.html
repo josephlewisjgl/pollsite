@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>My test page</title>
+  </head>
+  <body>
+      <ul>
+        {% for question in questions.choice_set.all %}
+            <li>{{choice.choice_text}} -- {{choice.votes}} vote{{choice.votes|pluralize}}</li>
+        </ul>
+
+        <a href = "{% url % 'polls:detail' question.id %}">Vote again?</a>
+    </body>
+</html>
