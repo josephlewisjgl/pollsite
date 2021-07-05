@@ -48,4 +48,5 @@ def vote(request, question_id):
     else: 
         selected_choice.votes += 1 # increment vote count by one 
         selected_choice.save() # save changes 
-        return HttpResponseRedirect(reverse('polls:results'), args=(question.id, )) # redirect to avoid refreshes double counting
+        return HttpResponseRedirect(reverse('polls:results', args=(question.id,))) # redirect to avoid refreshes double counting
+
