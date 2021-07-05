@@ -29,13 +29,13 @@ class DetailsView(generic.DetailView):
 class ResultsView(generic.DetailView):
     # Overriding the displayed model and the template 
     model = Question
-    template = 'polls/results.html'
+    template_name = 'polls/results.html'
 
 # Vote function to add a vote to an answer choice
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id) # find the question selected or throw a 404
 
-    # Handle the error in choices (No answer chosen)
+    # Handle the error in choices (No answer chosen)
     try:
         selected_choice = question.choice_set.get(pk=request.POST['choice']) # assign the question choice to selected and only change data with post
     except (KeyError, Choice.DoesNotExist):
@@ -46,6 +46,6 @@ def vote(request, question_id):
         })
 
     else: 
-        selected_choice.votes += 1 # increment vote count by one 
-        selected_choice.save() # save changes 
-        return HttpResponseRedirect(reverse('polls:results'), args=(question_id, )) # redirect to avoid refreshes double counting
+        selected_choice.votes += 1 # increment vote count by one 
+        selected_choice.save() # save changes 
+        return HttpResponseRedirect(reverse('polls:results'), args=(question.id, )) # redirect to avoid refreshes double counting
